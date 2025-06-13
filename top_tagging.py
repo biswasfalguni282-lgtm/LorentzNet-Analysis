@@ -197,9 +197,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
     utils.args_init(args)
 
-    ### set random seed
-    torch.manual_seed(args.seed + args.local_rank)
-    np.random.seed(args.seed + args.local_rank)
+    ### set random seed (random seed should be the same for all processes)
+    torch.manual_seed(args.seed)
+    np.random.seed(args.seed)
 
     ### initialize cuda
     dist.init_process_group(backend='nccl')
